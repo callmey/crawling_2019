@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
 
 public class April {
 
-	static String BASE_URL = "https://aprilskin.com";// ÆäÀÌÁö ³ª¿À±â Àü
+	static String BASE_URL = "https://aprilskin.com";// í˜ì´ì§€ ë‚˜ì˜¤ê¸° ì „
 	
 	static String BASE = BASE_URL + "/product/list.html?cate_no=48";
 	static String CLEANSING = BASE_URL + "/product/list.html?cate_no=45";
@@ -18,31 +18,31 @@ public class April {
 	static String MAKEUP = BASE_URL + "/product/list.html?cate_no=55";
 	
 	public void category(String link) throws IOException {
-		Document doc = Jsoup.connect(link).get(); // Ä«Å×°í¸® ¸µÅ© 
+		Document doc = Jsoup.connect(link).get(); // ì¹´í…Œê³ ë¦¬ ë§í¬ 
 		Elements img = doc.select("div.thumbnail a");	
 		Elements img1 = doc.select("div.thumbnail a img");	
 		Elements count = doc.select("p.prdCount strong");
 		
 		int c = Integer.parseInt(count.text());
-		System.out.println("»óÇ° ¼ö :" + c);
+		System.out.println("ìƒí’ˆ ìˆ˜ :" + c);
 		
 		for(int i = 0; i<c; i++) {
-			String str = img.eq(i).attr("href").replaceAll("&display_group=1", ""); // ºÒÇÊ¿äÇÑ ¸µÅ© »èÁ¦
-			String imgsrc = img1.eq(i).attr("src"); // imgÀÇ src ¼Ó¼º
+			String str = img.eq(i).attr("href").replaceAll("&display_group=1", ""); // ë¶ˆí•„ìš”í•œ ë§í¬ ì‚­ì œ
+			String imgsrc = img1.eq(i).attr("src"); // imgì˜ src ì†ì„±
 			String detail = BASE_URL + str;
-			System.out.println(detail);	// Á¦Ç°»ó¼¼ ÆäÀÌÁö ÁÖ¼Ò
-			System.out.println(imgsrc); // Á¦Ç°ÀÌ¹ÌÁö ÁÖ¼Ò
+			System.out.println(detail);	// ì œí’ˆìƒì„¸ í˜ì´ì§€ ì£¼ì†Œ
+			System.out.println(imgsrc); // ì œí’ˆì´ë¯¸ì§€ ì£¼ì†Œ
 			Document doc1 = Jsoup.connect(detail).get();
 			Elements title = doc1.select("div.infoArea h2"); 
-			System.out.println(title.text()); // Á¦Ç°¸í
+			System.out.println(title.text()); // ì œí’ˆëª…
 			Elements t = doc1.select("div.table_april tr th");
 			String[] arr = new String[t.size()];
 
 			for(int j = 0; j< t.size(); j++) {
 				arr[j] = t.eq(j).text();
-				if(arr[j].contains("Àü¼ººĞ")) {
+				if(arr[j].contains("ì „ì„±ë¶„")) {
 					Elements ingdnt = doc1.select("div.table_april tr td");
-					System.out.println(ingdnt.eq(j).text()); // Àü¼ººĞ
+					System.out.println(ingdnt.eq(j).text()); // ì „ì„±ë¶„
 				}
 			}
 			System.out.println("\n" + "=======================" + "\n");
@@ -53,15 +53,15 @@ public class April {
 		
 		April april = new April();
 		
-		System.out.println("======================º£ÀÌ½º============================" + "\n");
+		System.out.println("======================ë² ì´ìŠ¤============================" + "\n");
 		april.category(BASE);
-		System.out.println("======================Å¬·»Â¡============================" + "\n");
+		System.out.println("======================í´ë Œì§•============================" + "\n");
 		april.category(CLEANSING);
-		System.out.println("======================½ºÅ²ÄÉ¾î============================" + "\n");
+		System.out.println("======================ìŠ¤í‚¨ì¼€ì–´============================" + "\n");
 		april.category(SKIN);
-		System.out.println("======================Çì¾î¹Ùµğ============================" + "\n");
+		System.out.println("======================í—¤ì–´ë°”ë””============================" + "\n");
 		april.category(HAIRBODY);
-		System.out.println("======================¸ŞÀÌÅ©¾÷============================" + "\n");
+		System.out.println("======================ë©”ì´í¬ì—…============================" + "\n");
 		april.category(MAKEUP);
 
 	}
